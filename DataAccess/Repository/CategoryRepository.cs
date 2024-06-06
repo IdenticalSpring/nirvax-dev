@@ -13,6 +13,7 @@ namespace DataAccess.Repository
     {
         public Task<IEnumerable<Category>> GetAllCategoryAsync() => CategoryDAO.GetAllCategoryAsync();
         public Task<Category> GetCategoryByIdAsync(int id) => CategoryDAO.GetCategoryByIdAsync(id);
+        public Task<List<Category>> GetCategoryByNameAsync(string name) => CategoryDAO.GetCategoryByNameAsync(name);
         public Task<bool> CreateCategoryAsync(Category category)
         {
             category.Isdelete = false;

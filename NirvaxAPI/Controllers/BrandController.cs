@@ -43,7 +43,25 @@ namespace WebAPI.Controllers
             try
             {
                 var brand = await _repository.GetBrandByIdAsync(id);
-                if (brand == null || brand.Isdelete == true)
+                if (brand == null)
+                {
+                    return NotFound(new { message = "Brand not found." });
+                }
+                return Ok(brand);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("GetByName")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            try
+            {
+                var brand = await _repository.GetBrandByNameAsync(name);
+                if (!brand.Any())
                 {
                     return NotFound(new { message = "Brand not found." });
                 }

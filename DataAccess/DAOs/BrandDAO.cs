@@ -19,12 +19,19 @@ namespace DataAccess.DAOs
                 .Where(b => !b.Isdelete)
                 .ToListAsync();
         }
-
         public static async Task<Brand> GetBrandByIdAsync(int id)
         {
             return await _context.Brands
                 .Include(b => b.Category)
-                .SingleOrDefaultAsync(b => b.BrandId == id);
+                .FirstOrDefaultAsync(b => b.BrandId == id && !b.Isdelete);
+        }
+
+        public static async Task<List<Brand>> GetBrandByNameAsync(string name)
+        {
+            return await _context.Brands
+                .Include(b => b.Category)
+                .Where(b => b.Name.ToUpper().Contains(name.ToUpper()) && !b.Isdelete)
+                .ToListAsync();
         }
 
         public static async Task<IEnumerable<Brand>> GetBrandsByCategoryAsync(int cate_id)

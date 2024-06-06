@@ -11,6 +11,7 @@ namespace DataAccess.IRepository
     {
         Task<IEnumerable<Brand>> GetAllBrandAsync();
         Task<Brand> GetBrandByIdAsync(int id);
+        Task<List<Brand>> GetBrandByNameAsync(string name);
         Task<IEnumerable<Brand>> GetBrandsByCategoryAsync(int cate_id);
         Task<bool> CreateBrandAsync(Brand brand);
         Task<bool> UpdateBrandAsync(Brand brand);

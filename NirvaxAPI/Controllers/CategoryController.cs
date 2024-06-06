@@ -53,6 +53,24 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("GetByName")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            try
+            {
+                var category = await _repository.GetCategoryByNameAsync(name);
+                if (!category.Any())
+                {
+                    return NotFound(new { message = "Category not found." });
+                }
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CategoryDTO categoryDto)
         {

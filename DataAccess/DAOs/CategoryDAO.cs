@@ -23,6 +23,11 @@ namespace DataAccess.DAOs
             return await _context.Categories.FirstOrDefaultAsync(c => c.CategoryId == id);
         }
 
+        public static async Task<List<Category>> GetCategoryByNameAsync(string name)
+        {
+            return await _context.Categories.Where(c => c.Name.ToUpper().Contains(name.ToUpper()) && !c.Isdelete).ToListAsync();
+        }
+
         public static async Task<bool> CreateCategoryAsync(Category category)
         {
             await _context.Categories.AddAsync(category);

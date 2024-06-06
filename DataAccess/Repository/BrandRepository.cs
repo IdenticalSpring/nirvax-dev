@@ -14,6 +14,7 @@ namespace DataAccess.Repository
     {
         public async Task<IEnumerable<Brand>> GetAllBrandAsync() => await BrandDAO.GetAllBrandAsync();
         public async Task<Brand> GetBrandByIdAsync(int id) => await BrandDAO.GetBrandByIdAsync(id);
+        public async Task<List<Brand>> GetBrandByNameAsync(string name) => await BrandDAO.GetBrandByNameAsync(name);
         public async Task<IEnumerable<Brand>> GetBrandsByCategoryAsync(int cate_id) => await BrandDAO.GetBrandsByCategoryAsync(cate_id);
         public async Task<bool> CreateBrandAsync(Brand brand) 
         {
